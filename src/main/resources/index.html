@@ -1,0 +1,78 @@
+<!doctype html>
+    <html lang="en" ng-app="javafxwebdemo">
+      <head>
+        <meta charset="utf-8">
+        <title>My HTML File</title>
+        	
+        	<!-- before any uses of the backend objects -->
+        	<script src="js/fruits-service.js" type="text/javascript"></script>
+        	<script src="js/calculator-service.js" type="text/javascript"></script>
+        	
+ 			<script src="jslib/angular.min.js" type="text/javascript"></script>
+			
+			<script src="js/controller-angular.js" type="text/javascript"></script>
+			<!-- Latest compiled and minified CSS -->
+			<link rel="stylesheet" href="css/bootstrap.min.css">
+			
+			<!-- Optional theme -->
+			<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+			
+			<!-- Latest compiled and minified JavaScript -->
+			<script src="jslib/bootstrap.min.js"></script>   
+			
+			<link rel="stylesheet" href="style.css">
+      </head>
+      
+      <body ng-controller="JavaFXWebDemoController">
+      <h1>Java 8 desktop app with Web-based UI</h1>
+      <p>A JavaFX desktop application using WebView. The main logic is programmed
+      in pure Java, but the user interface is based on state of the art web
+      technologies: AngularJS (user controller) and Bootstrap (style and layout).
+      </p>  
+      <div class="container-fluid">
+      <div class="row">
+       <div class="col-sm-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Calculator (synchronous example)</h3>
+            </div>
+            <div class="panel-body">
+            
+	          Number1: <input ng-model="number1" class="form-control"><br>
+	          Number2: <input ng-model="number2" class="form-control"><br>
+	          
+	          <p>
+	          	Result of Number1 + Number2 is: {{ sum() }}<br>
+	          	<small>(the result is computed in pure Java via a synchronous call)</small>
+	          </p>
+            </div>
+          </div>
+         </div>
+      	<div class="col-sm-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Fruits (asynchronous example)</h3>
+            </div>
+            <div class="panel-body">
+	          Fruits: <small>(data is generated in pure Java via an asynchronous call)</small>
+	          <table class="table table-striped">
+	          	<thead>
+	          		<tr><th>Name</th></tr>
+	          	</thead>
+	          	<tbody>
+	          		<tr ng-repeat="fruit in fruits">
+	          			<td>{{fruit}}</td>
+	          		</tr>
+	          	</tbody>
+	          </table>
+	          <button class="btn btn-lg btn-success" ng-click="update()">Update data</button>
+            </div>
+          </div>
+         </div>
+        
+        </div>
+</div>
+<a href="index.html">Reload page</a>
+
+      </body>
+</html>
