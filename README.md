@@ -18,7 +18,7 @@ git clone https://github.com/lipido/javafxwebview.git
 * Compile and run
 ```
 cd javafxwebview
-maven package
+mvn package
 cd target
 java -jar javafx-webview-demo-0.0.1-SNAPSHOT.jar
 ```
