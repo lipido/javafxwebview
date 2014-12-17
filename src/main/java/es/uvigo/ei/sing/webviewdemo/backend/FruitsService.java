@@ -1,5 +1,6 @@
 package es.uvigo.ei.sing.webviewdemo.backend;
 
+import static es.uvigo.ei.sing.javafx.webview.Java2JavascriptUtils.call;
 import static java.lang.Thread.sleep;
 import static java.util.Arrays.asList;
 import static java.util.Collections.shuffle;
@@ -8,12 +9,10 @@ import static org.json.simple.JSONValue.toJSONString;
 
 import java.util.List;
 
-import es.uvigo.ei.sing.javafx.webview.Java2JavascriptUtils;
-
 public class FruitsService {
 
 	// async function
-	public void fruits(final Object callbackfunction){
+	public void loadFruits(final Object callbackfunction){
 		
 		// a database...
 		final List<String> fruits = asList(
@@ -25,9 +24,7 @@ public class FruitsService {
 					shuffle(fruits);
 					sleep(1000); //add some processing simulation...
 					runLater( () -> 							
-						Java2JavascriptUtils.call(
-								callbackfunction,
-								toJSONString(fruits))
+					call(callbackfunction, toJSONString(fruits))
 					);
 				} catch (InterruptedException e) {	}
 			}

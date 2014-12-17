@@ -12,7 +12,7 @@ app.controller('JavaFXWebDemoController', function ($scope) {
   $scope.update=function(){ 
     $scope.fruits = ["loading..."];
     
-    fruitsService.fruits(function(data){
+    fruitsService.loadFruits(function(data){
       $scope.fruits = data;
       $scope.$apply();      
     });
