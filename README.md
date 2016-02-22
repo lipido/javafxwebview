@@ -22,3 +22,16 @@ mvn package
 cd target
 java -jar javafx-webview-demo-0.0.1-SNAPSHOT.jar
 ```
+
+Warning: Windows Users
+-------------
+There is a bug since Java 8 update 60 in Windows (http://hg.openjdk.java.net/openjfx/9-dev/rt/rev/d4f8c9496683),
+where WebView is unable to load resources of the webpage if the project is delivered inside a JAR file.
+The workaround is to run the project in this way:
+```
+cd javafxwebview
+mvn package
+cd target
+java -cp classes;dependency-jars\json-simple-1.1.1.jar
+es.uvigo.ei.sing.webviewdemo.WebViewDemo
+```
