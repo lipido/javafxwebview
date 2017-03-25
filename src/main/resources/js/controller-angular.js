@@ -5,19 +5,25 @@ app.controller('JavaFXWebDemoController', function ($scope) {
 
   // fruits
   $scope.fruits = ["loading..."];
-  angular.element(document).ready(function () {
-	$scope.update();
-  });
     
   $scope.update=function(){ 
-    $scope.fruits = ["loading..."];
+    $scope.fruits = [{name:"loading..."}];
+    var callback = function(data) {
+        
+        // clone the array, because if we use the raw array returned from Java, 
+        // a pseudo-javascript Array is created which returns different object 
+        // wrapper instances each time a position is accessed
+        // for example: data[0] === data[0] is false!!, so Angular will throw a
+        // digest infinite loop exception because elements are allways dirty
+       $scope.fruits = Array.from(data); 
+      
+       $scope.$apply();
+    }
+    fruitsService.loadFruits(callback);
     
-    fruitsService.loadFruits(function(data){
-      $scope.fruits = data;
-      $scope.$apply();      
-    });
+   
   }
-  
+  $scope.update();
   // calculator
   $scope.number1 = 0;
   $scope.number2 = 2;

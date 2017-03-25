@@ -85,7 +85,7 @@ public class Java2JavascriptUtils {
 					@Override
 					public void changed(
 							ObservableValue
-							<? extends EventHandler<WebEvent<String>>> arg0,										
+							<? extends EventHandler<WebEvent<String>>> arg0,
 							EventHandler<WebEvent<String>> previous,
 							final EventHandler<WebEvent<String>> newHandler) {
 
@@ -124,10 +124,20 @@ public class Java2JavascriptUtils {
 		}
 	}
 	
-	public static void call(Object callback, Object argument) {	
-			// it is not a json object, so let the 
-			// API to create the javascript object
-			((JSObject)callback).eval("this("+argument.toString()+")");
+	
+	public static void call(JSObject callback, Object ... arguments) {
+                String argumentsList = "";
+                for (int i = 0; i < arguments.length; i++) {
+                System.out.println(arguments[i]);
+                    ((JSObject)callback).setMember("___res___"+i, arguments[i]);
+                    argumentsList+="this.___res___"+i;
+                    if (i != arguments.length -1) {
+                        argumentsList+=",";
+                    }
+                }
+                
+                String call = "this("+argumentsList+")";
+		((JSObject)callback).eval(call);
 	}
 	
 	private final static class AlertEventHandlerWrapper 

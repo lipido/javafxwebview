@@ -61,7 +61,7 @@
 	          	</thead>
 	          	<tbody>
 	          		<tr ng-repeat="fruit in fruits">
-	          			<td>{{fruit}}</td>
+	          			<td>{{fruit.getName()}}</td> <!-- getName() is a native-Java method inside Fruit class!! -->
 	          		</tr>
 	          	</tbody>
 	          </table>
