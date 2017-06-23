@@ -12,20 +12,27 @@ import java.util.List;
 
 public class FruitsService {
 
+        // a database... WARNING: I use a static field, since references from javascript seem not to be taken into account for GC, then,
+        // if I set fruits as a local variable inside loadFruits, they could be garbage collected and not seen anymore from
+        // javascript
+        
+        private static Fruit[] fruits;
+        static {
+              fruits =
+                    new Fruit[] { new Fruit("orange"), new Fruit("apple"), new Fruit("banana"), new Fruit("strawberry") };
+        }
 	// async function
 	public void loadFruits(final JSObject callbackfunction){
 		
-		// a database...
-		final Fruit[] fruits = 
-                    new Fruit[] { new Fruit("orange"), new Fruit("apple"), new Fruit("banana"), new Fruit("strawberry") };
+		
 		
 		// launch a background thread (async)
 		new Thread( () -> {
 				try {
-                                        shuffleArray(fruits);
+                                        shuffleFruits();
 					sleep(1000); //add some processing simulation...
 					runLater( () -> {
-                                            call(callbackfunction, (Object) fruits);
+                                            call(callbackfunction, (Object) FruitsService.fruits);
 					});
 					
 				} catch (InterruptedException e) {	}
@@ -33,9 +40,9 @@ public class FruitsService {
 		).start();
 	}
 	
-	private static Object[] shuffleArray(Object[] array) {
-            List<Object> list = asList(array);
+	private static void shuffleFruits() {
+            List<Object> list = asList(FruitsService.fruits);
             shuffle(list);
-            return list.toArray(new Object[]{});
+            FruitsService.fruits = list.toArray(new Fruit[]{});
 	}
 }

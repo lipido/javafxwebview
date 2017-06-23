@@ -128,7 +128,6 @@ public class Java2JavascriptUtils {
 	public static void call(JSObject callback, Object ... arguments) {
                 String argumentsList = "";
                 for (int i = 0; i < arguments.length; i++) {
-                System.out.println(arguments[i]);
                     ((JSObject)callback).setMember("___res___"+i, arguments[i]);
                     argumentsList+="this.___res___"+i;
                     if (i != arguments.length -1) {

@@ -61,7 +61,12 @@
 	          	</thead>
 	          	<tbody>
 	          		<tr ng-repeat="fruit in fruits">
-	          			<td>{{fruit.getName()}}</td> <!-- getName() is a native-Java method inside Fruit class!! -->
+                                        <!-- getName() is a native-Java method inside Fruit class!! -->
+                                        <!-- WARNING: It is better to use getters, instead of public fields inside pure Java objects
+                                             since it seems that wrappers created automatically from the web engine for Java objects
+                                             seem to do a cache of fields and this cache is affected during Java garbage collection. So getters
+                                             are better -->
+	          			<td>{{fruit.getName()}}</td> 
 	          		</tr>
 	          	</tbody>
 	          </table>
